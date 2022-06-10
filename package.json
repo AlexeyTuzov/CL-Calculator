@@ -16,7 +16,8 @@
     "@types/jest": "^28.1.1",
     "@types/readline-sync": "^1.4.4",
     "jest": "^28.1.1",
-    "ts-jest": "^28.0.4"
+    "ts-jest": "^28.0.4",
+    "typescript": "^4.7.3"
   },
   "dependencies": {
     "readline-sync": "^1.4.10"

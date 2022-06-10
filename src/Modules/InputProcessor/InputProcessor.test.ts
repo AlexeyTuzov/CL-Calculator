@@ -10,7 +10,7 @@ describe('Input Processor:', () => {
 
     beforeEach(() => {
         mockInputProcessorInstance = new InputProcessor();
-    })
+    });
 
     it('ask user for an expression to calculate', () => {
         mockInputProcessorInstance.ask();
@@ -28,7 +28,7 @@ describe('Input Processor:', () => {
     it('when user press \'y\' repeat calculations', () => {
         readline.keyInYN = jest.fn().mockImplementationOnce(() => true);
         const mockAsk = jest.spyOn(mockInputProcessorInstance, 'ask');
-        mockInputProcessorInstance.ask();
-        expect(mockAsk).toBeCalledTimes(2);
-    })
+        mockInputProcessorInstance.askForRepeat();
+        expect(mockAsk).toBeCalledTimes(1);
+    });
 });
