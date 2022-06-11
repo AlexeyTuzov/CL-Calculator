@@ -2,12 +2,13 @@ import OutputProcessor from './OutputProcessor';
 
 describe('Output Processor', () => {
 
-    let mockOutputProcessor: OutputProcessor;
-    const spyConsole = jest.spyOn(console, 'log');
     jest.mock('./OutputProcessor');
+    let mockOutputProcessor: OutputProcessor;
+    let spyConsole: jest.SpyInstance;
 
     beforeEach(() => {
         mockOutputProcessor = new OutputProcessor();
+        spyConsole = jest.spyOn(console, 'log');
     });
 
     it('set calculations result', () => {
@@ -19,6 +20,11 @@ describe('Output Processor', () => {
     it('log calculations result', () => {
         mockOutputProcessor.logResult();
         expect(spyConsole).toBeCalled();
+    });
+    it('set error message', () => {
+       mockOutputProcessor.setError('Oops! Some error occurred!');
+       mockOutputProcessor.logError();
+       expect(spyConsole).toBeCalledWith('Oops! Some error occurred!');
     });
     it('log error message', () => {
         mockOutputProcessor['errorMessage'] = 'Oops! Some error occurred!';

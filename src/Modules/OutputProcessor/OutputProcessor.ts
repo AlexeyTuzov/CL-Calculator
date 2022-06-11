@@ -8,15 +8,19 @@ export default class OutputProcessor {
         this.errorMessage = '';
     }
 
-    public logResult() {
+    public logResult(): void {
         console.log(`Result is: ${this.result}`);
     }
 
-    public setResult(result: number) {
+    public logError(): void {
+        console.log(this.errorMessage);
+    }
+
+    public setResult(result: number): void {
         this.result = result;
     }
 
-    public logError() {
-        console.log(this.errorMessage);
+    public setError(error: string): void {
+        this.errorMessage = error;
     }
 }
