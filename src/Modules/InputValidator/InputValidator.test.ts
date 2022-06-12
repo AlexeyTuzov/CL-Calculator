@@ -47,7 +47,7 @@ describe('Input Validator', () => {
     describe('check fractions', () => {
         it('fraction has only one dot', () => {
             mockInputValidator.validate('(0.1+0.2)/0.3.4');
-            expect(mockInputValidator.getValidationResult()).toBe('Wrong decimal fraction in an expression');
+            expect(mockInputValidator.getValidationResult()).toBe('Duplicated decimal dot in an expression');
         });
         it('dot in right position', () => {
             mockInputValidator.validate('(0.1+2.)/0.3');
