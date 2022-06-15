@@ -2,7 +2,6 @@ import OutputProcessor from './OutputProcessor';
 
 describe('Output Processor', () => {
 
-    jest.mock('./OutputProcessor');
     let mockOutputProcessor: OutputProcessor;
     let spyConsole: jest.SpyInstance;
 

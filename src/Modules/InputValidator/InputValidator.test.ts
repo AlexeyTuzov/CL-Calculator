@@ -2,7 +2,6 @@ import InputValidator from './InputValidator';
 
 describe('Input Validator', () => {
 
-    jest.mock('./InputValidator');
     let mockInputValidator: InputValidator;
 
     beforeEach(() => {
@@ -30,6 +29,10 @@ describe('Input Validator', () => {
         it('catch error if there is no operator between parentheses', () => {
             mockInputValidator.validate('(1+2)(3*4)');
             expect(mockInputValidator.getValidationResult()).toBe('No operator between parentheses');
+        });
+        it('catch error if there are empty parentheses in an expression', () => {
+           mockInputValidator.validate('1+()-4');
+           expect(mockInputValidator.getValidationResult()).toBe('Empty parentheses in an expression');
         });
     });
 

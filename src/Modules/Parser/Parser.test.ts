@@ -1,24 +1,31 @@
 import Parser from './Parser';
 import Calculator from '../Calculator/Calculator';
-import { mocked } from 'jest-mock';
 
 jest.mock('../Calculator/Calculator');
-jest.mock('./Parser');
 
 describe('Parser', () => {
 
-    let mockParser = mocked(Parser, true);
+    let mockParser: Parser;
 
     beforeEach(() => {
-    
+        mockParser = new Parser();
     });
 
-    it('creates an instance of Calculator', () => {
-    
+    it('create an instance of Calculator', () => {
         expect(Calculator).toHaveBeenCalledTimes(1);
     });
-
-    it('find most nested parentheses expression', () => {
-       // mockParser.parseUserInput('(1+2*(3-2))');
+    it('get result after calculations', () => {
+        mockParser['result'] = '42';
+        expect(mockParser.getResult()).toBe('42');
     });
+    it('return error if it is occurred', () => {
+        mockParser['result'] = 'NaN';
+        mockParser['error'] = 'Divided by zero';
+        expect(mockParser.getResult()).toBe('Divided by zero');
+    });
+    it('return an input in case of no math operators', () => {
+       mockParser.parseUserInput('(42)');
+       expect(mockParser.getResult()).toBe('42');
+    });
+
 });

@@ -37,6 +37,9 @@ export default class InputValidator {
             if (prev === ')' && current === '(') {
                 this.error = 'No operator between parentheses';
             }
+            if (prev === '(' && current === ')') {
+                this.error = 'Empty parentheses in an expression';
+            }
             return current;
         }, '');
     }

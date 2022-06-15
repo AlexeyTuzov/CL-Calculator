@@ -3,7 +3,6 @@ import readline from 'readline-sync';
 
 describe('Input Processor:', () => {
 
-    jest.mock('./InputProcessor');
     let mockInputProcessor: InputProcessor;
     readline.question = jest.fn();
     readline.keyInYN = jest.fn();
