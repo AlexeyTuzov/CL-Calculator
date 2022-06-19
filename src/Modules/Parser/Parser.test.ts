@@ -18,7 +18,7 @@ describe('Parser', () => {
         mockParser['result'] = '42';
         expect(mockParser.getResult()).toBe('42');
     });
-    it('return error if it is occurred', () => {
+    it('return error if it has been occurred', () => {
         mockParser['result'] = 'NaN';
         mockParser['error'] = 'Divided by zero';
         expect(mockParser.getResult()).toBe('Divided by zero');
