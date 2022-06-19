@@ -19,6 +19,7 @@ export default class Parser {
     }
 
     public parseUserInput(input: string): void {
+        this.input = input;
         while (true) {
             let inputHasOperators: boolean = this.checkOperators();
             if (inputHasOperators) {
@@ -27,7 +28,7 @@ export default class Parser {
                 this.intermediateResult = this.calculator.getResult();
                 this.pasteResult(nestedExpression);
             } else {
-                this.result = findFirstNestedExp(input);
+                this.result = findFirstNestedExp(this.input);
                 break;
             }
         }
@@ -52,6 +53,6 @@ export default class Parser {
     }
 
     private pasteResult(nestedExpression: string): void {
-        this.input.replace(`(${nestedExpression})`, this.intermediateResult);
+        this.input = this.input.replace(`(${nestedExpression})`, this.intermediateResult);
     }
 }

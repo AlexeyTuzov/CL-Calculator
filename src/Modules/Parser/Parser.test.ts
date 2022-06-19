@@ -24,8 +24,15 @@ describe('Parser', () => {
         expect(mockParser.getResult()).toBe('Divided by zero');
     });
     it('return an input in case of no math operators', () => {
-       mockParser.parseUserInput('(42)');
-       expect(mockParser.getResult()).toBe('42');
+        mockParser.parseUserInput('(42)');
+        expect(mockParser.getResult()).toBe('42');
     });
-
+    it('parse input and save a result', () => {
+        mockParser.parseUserInput('(2*21)');
+        const calculate = jest.spyOn(mockParser['calculator'], 'calculate');
+        const getResult = jest.spyOn(mockParser['calculator'], 'getResult').mockImplementation(() => '42');
+        expect(calculate).toHaveBeenCalledTimes(1);
+        expect(calculate).toHaveBeenCalledWith('2*21');
+        expect(getResult).toHaveBeenCalledTimes(1);
+    });
 });
