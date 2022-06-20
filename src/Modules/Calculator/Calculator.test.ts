@@ -23,7 +23,7 @@ describe('Calculator', () => {
         mockCalculator['error'] = 'Calculations went wrong';
         expect(mockCalculator.getResult()).toBe('Calculations went wrong');
     });
-    it('return an incoming expression if no operators found', () => {
+    it('return an incoming expression if no operators are found', () => {
         mockCalculator.calculate('42');
         expect(mockCalculator.getResult()).toBe('42');
     });
