@@ -1,32 +1,56 @@
-import Operators from '../../Modules/Math_Operations/OperatorsList';
+import Operators, { IOperator } from '../../Modules/Math_Operations/OperatorsList';
 import shieldSymbols from '../shieldSymbols/shieldSymbols';
 
 const checkOperatorsUsage = (expression: string): string => {
 
     let errorMessage: string = '';
 
-    const allOperatorsArray = Operators.map(item => item.sign);
+    const allOperatorsSigns = Operators.map(item => item.sign);
 
     const symbolsArray: RegExpMatchArray | null = expression.match(/[^\d.]+/g);
     if (symbolsArray) {
-        const withoutParentheses = symbolsArray.map(item => item.replace(/[()]/g, '' ));
-        const withoutEmptyElements = withoutParentheses.filter(item => item !== '');
-        withoutEmptyElements.forEach(item => {
-            const isItOperator = allOperatorsArray.find(operator => operator === item);
+        symbolsArray.forEach(sequence => {
+            const isItOperator = allOperatorsSigns.find(operatorSign => operatorSign === sequence);
             if (!isItOperator) {
-                errorMessage = 'Incorrect character in expression';
+                let firstSign: IOperator | undefined;
+                let secondSign: IOperator | undefined;
+                let theRestOfSequence: string = '';
+                Operators.forEach(firstOperator => {
+                    const shieldedSign = shieldSymbols(firstOperator.sign);
+                    const firstMatch: string = String.raw`^${shieldedSign}`;
+                    if (sequence.match(RegExp(firstMatch))) {
+                        firstSign = firstOperator;
+                        theRestOfSequence = sequence.slice(firstOperator.sign.length);
+                    }
+                });
+                Operators.forEach(secondOperator => {
+                    const shieldedSign = shieldSymbols(secondOperator.sign);
+                    const secondMatch: string = String.raw`^${shieldedSign}`;
+                    if (theRestOfSequence.match(RegExp(secondMatch))) {
+                        secondSign = secondOperator;
+                        theRestOfSequence = theRestOfSequence.slice(secondOperator.sign.length);
+                    }
+                });
+                if (theRestOfSequence.length > 0) {
+                    errorMessage = 'Wrong operators statement';
+                } else if (firstSign && secondSign) {
+                    if (firstSign!.unaryOnly || (!firstSign!.unaryOnly && !secondSign!.unaryOnly )) {
+                        errorMessage = 'Wrong operators statement';
+                    }
+                } else {
+                    errorMessage = 'Incorrect character in expression';
+                }
             }
         });
     }
 
     if (errorMessage) return errorMessage;
 
-    const unaryOnlyOperatorsArray = Operators.filter(item => item.unaryOnly).map(item => item.sign);
-    unaryOnlyOperatorsArray.forEach(item => {
+    allOperatorsSigns.forEach(item => {
         let shielded = shieldSymbols(item);
-        let errorStatement: string = String.raw`.*${shielded}($|\))`;
+        let errorStatement: string = String.raw`.*${shielded}$`;
         if (expression.match(RegExp(errorStatement))) {
-            errorMessage = 'Wrong unary only operators statement';
+            errorMessage = 'Wrong operators statement';
         }
     });
 
@@ -35,13 +59,14 @@ const checkOperatorsUsage = (expression: string): string => {
     const cantStandFirstOperatorsArray = Operators.filter(item => !item.mightBeFirst).map(item => item.sign);
     cantStandFirstOperatorsArray.forEach(item => {
         let shielded = shieldSymbols(item);
-        let errorStatement: string = String.raw`(^|\()${shielded}`;
+        let errorStatement: string = String.raw`^${shielded}`;
         if (expression.match(RegExp(errorStatement))) {
             errorMessage = 'Wrong operators statement';
         }
     });
 
     return errorMessage ? errorMessage : 'Correct';
+
 }
 
 export default checkOperatorsUsage;

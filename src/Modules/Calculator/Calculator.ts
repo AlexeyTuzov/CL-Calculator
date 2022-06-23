@@ -9,7 +9,7 @@ private expression: string;
 private error: string;
 private result: string;
 private mathOperation: MathOperation;
-private MathOperator: MathOperator
+private MathOperator: MathOperator;
 
     constructor() {
         this.error = '';
