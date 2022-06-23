@@ -25,8 +25,14 @@ export default class Parser {
             if (inputHasOperators) {
                 let nestedExpression: string = findFirstNestedExp(input);
                 this.calculator.calculate(nestedExpression);
-                this.intermediateResult = this.calculator.getResult();
-                this.pasteResult(nestedExpression);
+                let errorMessage = this.calculator.getError();
+                if (errorMessage) {
+                    this.error = errorMessage;
+                    break;
+                } else {
+                    this.intermediateResult = this.calculator.getResult();
+                    this.pasteResult(nestedExpression);
+                }
             } else {
                 this.result = findFirstNestedExp(this.input);
                 break;

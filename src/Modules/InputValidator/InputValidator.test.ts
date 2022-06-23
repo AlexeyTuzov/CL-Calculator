@@ -36,17 +36,6 @@ describe('Input Validator', () => {
         });
     });
 
-    describe('check symbols', () => {
-        it('catch error if incorrect symbols are found', () => {
-            mockInputValidator.validate('(1+2)-4/5*0.8x');
-            expect(mockInputValidator.getValidationResult()).toBe('Wrong symbol has been found in an expression');
-        });
-        it('catch error if two math operators in a row', () => {
-            mockInputValidator.validate('(1+2)-4/5*/0.8');
-            expect(mockInputValidator.getValidationResult()).toBe('Two or more math operators in a row');
-        });
-    });
-
     describe('check fractions', () => {
         it('fraction has only one dot', () => {
             mockInputValidator.validate('(0.1+0.2)/0.3.4');

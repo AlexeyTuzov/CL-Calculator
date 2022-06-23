@@ -1,21 +1,34 @@
-const OperatorsList: string[] = ['+', '-', '*', '/', '(', ')'];
+export interface IOperator {
+    sign: string;
+    priority: number;
+    mightBeFirst: boolean;
+    unaryOnly: boolean;
+}
 
-export const OperatorsPriorities = [
+const Operators = [
     {
-        operator:'+',
-        priority: 2
+        sign:'+',
+        priority: 2,
+        mightBeFirst: false,
+        unaryOnly: false
     },
     {
-        operator:'-',
-        priority: 2
+        sign:'-',
+        priority: 2,
+        mightBeFirst: true,
+        unaryOnly: false
     },
     {
-        operator:'*',
-        priority: 1
+        sign:'*',
+        priority: 1,
+        mightBeFirst: false,
+        unaryOnly: false
     },
     {
-        operator: '/',
-        priority: 1
+        sign: '/',
+        priority: 1,
+        mightBeFirst: false,
+        unaryOnly: false
     }
 ];
-export default OperatorsList;
+export default Operators;

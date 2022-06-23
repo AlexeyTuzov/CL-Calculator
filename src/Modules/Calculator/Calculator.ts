@@ -1,6 +1,6 @@
 import MathOperator from '../Math_Operations/MathOperator';
 import { MathOperation } from '../Math_Operations/MathOperator';
-import OperatorsList from '../Math_Operations/OperatorsList';
+import Operators from '../Math_Operations/OperatorsList';
 import checkOperators from '../../Utilites/checkOperators/checkOperators';
 
 export default class Calculator {
@@ -37,19 +37,23 @@ private MathOperator: MathOperator
     }
 
     public getResult(): string {
-        return this.error ? this.error : this.result;
+        return this.result;
+    }
+
+    public getError(): string {
+        return this.error;
     }
 
     private findFirstHighPriorityOperation(): string {
-
+        return '';
     }
 
     private checkOperatorsStatement(): boolean {
-
+        return true;
     }
 
     private isDividedByZero(): boolean {
-
+        return true;
     }
 
 

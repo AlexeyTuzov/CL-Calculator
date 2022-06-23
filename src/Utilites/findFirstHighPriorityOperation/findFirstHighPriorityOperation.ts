@@ -1,7 +1,7 @@
-import { OperatorsPriorities } from '../../Modules/Math_Operations/OperatorsList';
+import Operators from '../../Modules/Math_Operations/OperatorsList';
 
 interface IPriorities {
-    operator: string;
+    sign: string;
     priority: number;
 }
 
@@ -9,13 +9,13 @@ const findFirstHighPriorityOperation = (expression: string): string => {
 
     let prioritiesArray: string[] = [];
 
-    let firstPriority: IPriorities[] = OperatorsPriorities.filter(item => item.priority === 1);
-    let firstPrioritySymbols: string = firstPriority.map(item => item.operator).join('');
+    let firstPriority: IPriorities[] = Operators.filter(item => item.priority === 1);
+    let firstPrioritySymbols: string = firstPriority.map(item => item.sign).join('');
     let firstOperation: string = String.raw`(\d+\.?\d*|\d+)[${firstPrioritySymbols}](\d+\.?\d*|\d+)`;
     prioritiesArray.push(firstOperation);
 
-    let secondPriority: IPriorities[] = OperatorsPriorities.filter(item => item.priority === 2);
-    let secondPrioritySymbols: string = secondPriority.map(item => item.operator).join('');
+    let secondPriority: IPriorities[] = Operators.filter(item => item.priority === 2);
+    let secondPrioritySymbols: string = secondPriority.map(item => item.sign).join('');
     let secondOperation: string = String.raw`(\d+\.?\d*|\d+)[${secondPrioritySymbols}](\d+\.?\d*|\d+)`;
     prioritiesArray.push(secondOperation);
 

@@ -1,16 +1,13 @@
-import OperatorsList from '../../Modules/Math_Operations/OperatorsList';
-
 const checkOperators = (expression: string): boolean => {
     let isOperators: boolean = false;
-    Array.from(expression).forEach((item: string) => {
-        let operatorFound: string | undefined = OperatorsList.find(operator =>
-            operator === item &&
-            operator != '(' &&
-            operator != ')');
-        if (operatorFound) {
-            isOperators = true;
+    let nonNumericSymbol: RegExp = /[^\d.()]/;
+
+    Array.from(expression).reduce((prev: string, current: string) => {
+        if (current.match(nonNumericSymbol)) {
+            isOperators = isOperators || !(current === '-' && prev === '' || prev === '(');
         }
-    });
+        return current;
+    }, '');
     return isOperators;
 }
 

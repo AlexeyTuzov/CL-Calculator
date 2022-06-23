@@ -1,7 +1,18 @@
-import Parser from './Parser';
 import Calculator from '../Calculator/Calculator';
+import Parser from './Parser';
 
-jest.mock('../Calculator/Calculator');
+let mockGetError = jest.fn();
+let mockCalculate = jest.fn();
+let mockGetResult = jest.fn();
+jest.mock('../Calculator/Calculator', () => {
+    return jest.fn().mockImplementation(() => {
+        return {
+            getResult: mockGetResult,
+            calculate: mockCalculate,
+            getError: mockGetError
+        }
+    });
+});
 
 describe('Parser', () => {
 
@@ -11,6 +22,12 @@ describe('Parser', () => {
         mockParser = new Parser();
     });
 
+    afterEach(() => {
+        mockGetResult.mockRestore();
+        mockCalculate.mockRestore();
+        mockGetError.mockRestore();
+    })
+
     it('create an instance of Calculator', () => {
         expect(Calculator).toHaveBeenCalledTimes(1);
     });
@@ -19,20 +36,21 @@ describe('Parser', () => {
         expect(mockParser.getResult()).toBe('42');
     });
     it('return error if it has been occurred', () => {
-        mockParser['result'] = 'NaN';
-        mockParser['error'] = 'Divided by zero';
-        expect(mockParser.getResult()).toBe('Divided by zero');
+        mockGetError.mockImplementationOnce(() => 'Calculations went wrong');
+        mockParser.parseUserInput('1/0');
+        expect(mockParser.getResult()).toBe('Calculations went wrong');
     });
+
     it('return an input in case of no math operators', () => {
         mockParser.parseUserInput('(42)');
         expect(mockParser.getResult()).toBe('42');
     });
     it('parse input and save a result', () => {
+        mockGetResult.mockImplementationOnce(() => '42');
         mockParser.parseUserInput('(2*21)');
-        const calculate = jest.spyOn(mockParser['calculator'], 'calculate');
-        const getResult = jest.spyOn(mockParser['calculator'], 'getResult').mockImplementation(() => '42');
-        expect(calculate).toHaveBeenCalledTimes(1);
-        expect(calculate).toHaveBeenCalledWith('2*21');
-        expect(getResult).toHaveBeenCalledTimes(1);
+        expect(mockCalculate).toHaveBeenCalledTimes(1);
+        expect(mockCalculate).toHaveBeenCalledWith('2*21');
+        expect(mockGetResult).toHaveBeenCalledTimes(1);
+        expect(mockParser.getResult()).toBe('42');
     });
 });
