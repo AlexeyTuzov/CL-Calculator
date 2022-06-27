@@ -1,28 +1,28 @@
 import Operators from '../../Modules/Math_Operations/OperatorsList';
-
-interface IPriorities {
-    sign: string;
-    priority: number;
-}
+import shieldSymbols from '../shieldSymbols/shieldSymbols';
 
 const findFirstHighPriorityOperation = (expression: string): string => {
 
-    let prioritiesArray: string[] = [];
+    let sortedByPriority = Operators.sort((a, b) => {
+        return a.priority - b.priority;
+    });
 
-    let firstPriority: IPriorities[] = Operators.filter(item => item.priority === 1);
-    let firstPrioritySymbols: string = firstPriority.map(item => item.sign).join('');
-    let firstOperation: string = String.raw`(\d+\.?\d*|\d+)[${firstPrioritySymbols}](\d+\.?\d*|\d+)`;
-    prioritiesArray.push(firstOperation);
+    let sortedByUnary = sortedByPriority.sort((a, b) => {
+        if (a.unaryOnly && !b.unaryOnly) return -1;
+        if (!a.unaryOnly && b.unaryOnly) return 1;
+        else return 0;
+    });
 
-    let secondPriority: IPriorities[] = Operators.filter(item => item.priority === 2);
-    let secondPrioritySymbols: string = secondPriority.map(item => item.sign).join('');
-    let secondOperation: string = String.raw`(\d+\.?\d*|\d+)[${secondPrioritySymbols}](\d+\.?\d*|\d+)`;
-    prioritiesArray.push(secondOperation);
+    let operationExpressions = sortedByUnary.map(operator => {
+        let shieldedSign = shieldSymbols(operator.sign);
+        if (operator.unaryOnly) return String.raw`${shieldedSign}(-*\d+\.?\d*|\d+)`;
+        else  return String.raw`(\d+\.?\d*|\d+)${shieldedSign}(\d+\.?\d*|\d+)`;
+    });
 
     let matchArray: RegExpMatchArray | null;
     let highPriorityExpression: string = '';
 
-    prioritiesArray.find(item => {
+    operationExpressions.find(item => {
         matchArray = expression.match(RegExp(item));
         if (matchArray) {
             highPriorityExpression = matchArray[0];
@@ -33,7 +33,6 @@ const findFirstHighPriorityOperation = (expression: string): string => {
     });
 
     return highPriorityExpression;
-
 }
 
 export default findFirstHighPriorityOperation;
