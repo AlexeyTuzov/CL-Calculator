@@ -1,7 +1,10 @@
 import MathOperator from '../Math_Operations/MathOperator';
 import { MathOperation } from '../Math_Operations/MathOperator';
 import Operators from '../Math_Operations/OperatorsList';
+import findFirstHighPriorityOperation
+    from '../../Utilites/findFirstHighPriorityOperation/findFirstHighPriorityOperation';
 import checkOperators from '../../Utilites/checkOperators/checkOperators';
+import checkOperatorsUsage from '../../Utilites/checkOperatorsUsage/checkOperatorsUsage';
 
 export default class Calculator {
 
@@ -28,7 +31,11 @@ private MathOperator: MathOperator;
         while(true) {
             let expHasOperators = checkOperators(this.expression);
             if (expHasOperators) {
-                break;
+                if (this.checkIfOperatorsCorrect()) {
+                    let currentOperation = findFirstHighPriorityOperation(this.expression);
+                } else {
+                    break;
+                }
             } else {
                 this.result = this.expression;
                 break;
@@ -44,16 +51,14 @@ private MathOperator: MathOperator;
         return this.error;
     }
 
-    private findFirstHighPriorityOperation(): string {
-        return '';
+    private formCalculationsObject(currentOperation: string): void {
+        let
     }
 
-    private checkOperatorsStatement(): boolean {
-        return true;
-    }
-
-    private isDividedByZero(): boolean {
-        return true;
+    private checkIfOperatorsCorrect(): boolean {
+        let checkResult: string = checkOperatorsUsage(this.expression);
+        this.error = checkResult === 'Correct' ? '' : checkResult;
+        return !this.error;
     }
 
 

@@ -68,7 +68,8 @@ describe('Check operators statement', () => {
         expect(checkOperatorsUsage('1-2-3**')).toBe('Wrong operators statement');
     });
     it('catch an error if incorrect character in expression', () => {
-       expect(checkOperatorsUsage('qwerty1+2')).toBe('Incorrect character in expression');
+        expect(checkOperatorsUsage('qwerty1+2')).toBe('Incorrect character in expression');
         expect(checkOperatorsUsage('-sin+1+2')).toBe('Wrong operators statement');
+        expect(checkOperatorsUsage('-sin-1+2')).toBe('Correct');
     });
 });

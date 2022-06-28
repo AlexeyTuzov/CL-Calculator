@@ -31,10 +31,10 @@ const checkOperatorsUsage = (expression: string): string => {
                         theRestOfSequence = theRestOfSequence.slice(secondOperator.sign.length);
                     }
                 });
-                if (theRestOfSequence.length > 0) {
+                if (theRestOfSequence.length > 0 && theRestOfSequence !== '-') {
                     errorMessage = 'Wrong operators statement';
                 } else if (firstSign && secondSign) {
-                    if (firstSign!.unaryOnly || (!firstSign!.unaryOnly && !secondSign!.unaryOnly )) {
+                    if (firstSign!.unaryOnly || (!firstSign!.unaryOnly && !secondSign!.unaryOnly)) {
                         errorMessage = 'Wrong operators statement';
                     }
                 } else {
@@ -66,7 +66,6 @@ const checkOperatorsUsage = (expression: string): string => {
     });
 
     return errorMessage ? errorMessage : 'Correct';
-
 }
 
 export default checkOperatorsUsage;

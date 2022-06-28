@@ -27,14 +27,6 @@ describe('Calculator', () => {
         mockCalculator.calculate('42');
         expect(mockCalculator.getResult()).toBe('42');
     });
-    it('return an error if divided by zero', () => {
-        mockCalculator['mathOperation'] = {
-            a: 2,
-            b: 0,
-            operator: '/'
-        };
-        expect(mockCalculator.getResult()).toBe('Divided by zero');
-    });
     it('return an error in case of wrong operators statement', () => {
         mockCalculator.calculate('2+4*');
         expect(mockCalculator.getResult()).toBe('Wrong operators statement');
