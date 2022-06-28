@@ -56,6 +56,9 @@ describe('Check operators statement', () => {
     });
     it('unary only operators can stand only before numbers', () => {
         expect(checkOperatorsUsage('sin30-0.5')).toBe('Correct');
+        expect(checkOperatorsUsage('sin-0.5')).toBe('Correct');
+        expect(checkOperatorsUsage('sin-1')).toBe('Correct');
+        expect(checkOperatorsUsage('sin--1')).toBe('Wrong operators statement');
         expect(checkOperatorsUsage('-0.5+30sin')).toBe('Wrong operators statement');
     });
     it('catch an error if binary operator being used without first operand', () => {

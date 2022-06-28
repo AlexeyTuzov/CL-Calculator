@@ -33,8 +33,11 @@ const checkOperatorsUsage = (expression: string): string => {
                 });
                 if (theRestOfSequence.length > 0 && theRestOfSequence !== '-') {
                     errorMessage = 'Wrong operators statement';
+                } else if (theRestOfSequence === '-' && secondSign?.sign === '-') {
+                    errorMessage = 'Wrong operators statement';
                 } else if (firstSign && secondSign) {
-                    if (firstSign!.unaryOnly || (!firstSign!.unaryOnly && !secondSign!.unaryOnly)) {
+                    if ((firstSign.unaryOnly && secondSign.sign !== '-') ||
+                        (!firstSign.unaryOnly && !secondSign.unaryOnly)) {
                         errorMessage = 'Wrong operators statement';
                     }
                 } else {

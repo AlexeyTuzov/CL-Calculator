@@ -10,5 +10,7 @@ describe('checkOperators', () => {
         expect(checkOperators('-42')).toBe(false);
         expect(checkOperators('(-0.42)')).toBe(false);
         expect(checkOperators('-0.42-(-0.5)')).toBe(true);
+        expect(checkOperators('sin(-0.5)')).toBe(true);
+        expect(checkOperators('sin-1')).toBe(true);
     });
 });
