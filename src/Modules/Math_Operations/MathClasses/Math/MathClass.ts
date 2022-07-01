@@ -2,9 +2,9 @@ export default abstract class MathClass {
 
     protected a: number;
     protected b: number;
-    private result: number;
-    private error: string;
-    private coefficient: number;
+    protected result: number;
+    protected error: string;
+    protected coefficient: number;
 
     protected constructor(a: number, b: number) {
         this.a = a;
@@ -23,7 +23,7 @@ export default abstract class MathClass {
         return this.error;
     }
 
-    public doCalculations() {
+    public doCalculations(): void {
         this.normalizeFractions();
         this.checkTheNumbers()
         if (!this.error) {
@@ -31,15 +31,9 @@ export default abstract class MathClass {
         }
     }
 
-    protected calculate() {
+    protected calculate(): void {}
 
-    }
-
-    protected setResult(result: number) {
-        this.result = result;
-    }
-
-    private normalizeFractions() {
+    private normalizeFractions(): void {
         while (this.a.toString().match(/\./) || this.b.toString().match(/\./)) {
             this.a = +(this.a * 10).toFixed(10);
             this.b = +(this.b * 10).toFixed(10);
@@ -47,7 +41,7 @@ export default abstract class MathClass {
         }
     }
 
-    private checkTheNumbers() {
+    private checkTheNumbers(): void {
         if (this.a > 9007199254740991 ||
             this.b > 9007199254740991 ||
             this.a < -9007199254740991 ||

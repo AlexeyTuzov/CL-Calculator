@@ -9,13 +9,24 @@ describe('Math class (abstract)', () => {
             this.b = b;
         }
 
-        protected calculate() {
-            this.setResult(this.a + this.b);
+        protected calculate(): void {
+            this.result = this.a + this.b;
+        }
+    }
+    class OriginalClass extends MathClass {
+        constructor(a: number, b: number) {
+            super(a, b);
         }
     }
 
     let someOperationInstance: SomeOperation;
+    let originalInstance: OriginalClass;
 
+    it('original calculate method is callable', () => {
+        originalInstance = new OriginalClass(42, 42);
+        originalInstance.doCalculations();
+        expect(originalInstance.getResult()).toBe(0);
+    })
     it('normalize fractions', () => {
         someOperationInstance = new SomeOperation(0.1, 0.2);
         someOperationInstance.doCalculations();
@@ -31,6 +42,6 @@ describe('Math class (abstract)', () => {
         someOperationInstance = new SomeOperation(-9007199254740995, 42);
         someOperationInstance.doCalculations();
         expect(someOperationInstance.getError()).toBe('One of operands is out of JS-supported safe number range');
-    })
+    });
 
 });
