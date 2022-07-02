@@ -14,7 +14,7 @@ const formCalculationObject = (currentOperation: string): MathOperation => {
     }
     const operatorMatch: RegExpMatchArray | null = operation.match(/^\D*/);
     if (operatorMatch) {
-        let isThereUnaryMinus: RegExpMatchArray | null = operatorMatch[0].match(/-$/);
+        let isThereUnaryMinus: RegExpMatchArray | null = operatorMatch[0].match(/.-$/);
         if (isThereUnaryMinus) {
             mathOperation.operator = operation.slice(0, operatorMatch[0].length - 1);
             operation = operation.slice(operatorMatch[0].length - 1);

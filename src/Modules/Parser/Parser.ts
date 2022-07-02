@@ -45,10 +45,9 @@ export default class Parser {
     }
 
     private pasteResult(nestedExpression: string): void {
-        let inParenthesesExpression: string = String.raw`(${nestedExpression})`;
-        if (nestedExpression.match(inParenthesesExpression)) {
+        let inParenthesesExpression: string = String.raw`\(${nestedExpression}\)`;
+        if (this.input.match(inParenthesesExpression)) {
             this.input = this.input.replace(`(${nestedExpression})`, this.intermediateResult);
-            console.log(this.intermediateResult);
         } else {
             this.input = this.input.replace(`${nestedExpression}`, this.intermediateResult);
         }

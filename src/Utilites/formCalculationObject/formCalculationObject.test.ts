@@ -12,6 +12,11 @@ describe('Form calculation object', () => {
             b: 3.21,
             operator: '/'
         });
+        expect(formCalculationObject('12-3')).toEqual( {
+            a: 12,
+            b: 3,
+            operator: '-'
+        });
         expect(formCalculationObject('0.1**4')).toEqual( {
             a: 0.1,
             b: 4,
