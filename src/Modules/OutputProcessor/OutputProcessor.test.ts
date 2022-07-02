@@ -11,7 +11,7 @@ describe('Output Processor', () => {
     });
 
     it('set calculations result', () => {
-        mockOutputProcessor.setResult(42);
+        mockOutputProcessor.setResult('42');
         mockOutputProcessor.logResult();
         expect(spyConsole).toBeCalledWith('Result is: 42');
 

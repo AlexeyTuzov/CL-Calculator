@@ -9,8 +9,7 @@ export default class InputProcessor {
     }
 
     public ask(): void {
-        const answer: string = readline.question('Enter the expression: ');
-        this.setInput(answer);
+        this.input = readline.question('Enter the expression: ');
         this.trimSpaces();
     }
 
@@ -20,10 +19,6 @@ export default class InputProcessor {
 
     public askForRepeat(): void {
         if (readline.keyInYN('Continue calculations?')) this.ask();
-    }
-
-    private setInput(input: string): void {
-        this.input = input;
     }
 
     private trimSpaces(): void {

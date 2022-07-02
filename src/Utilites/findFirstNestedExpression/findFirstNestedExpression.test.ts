@@ -9,5 +9,6 @@ describe('findFirstNestedExpression', () => {
         expect(findFirstNestedExp('(1+(2-3+(5/10)))+2')).toBe('5/10');
         expect(findFirstNestedExp('-1*((2+3)+4)')).toBe('2+3');
         expect(findFirstNestedExp('(((1+2)))')).toBe('1+2');
+        expect(findFirstNestedExp('(6)+1')).toBe('6');
     });
 });

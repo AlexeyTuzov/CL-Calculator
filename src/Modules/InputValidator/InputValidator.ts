@@ -1,5 +1,3 @@
-import OperatorsList from '../Math_Operations/OperatorsList';
-
 export default class InputValidator {
 
     private error: string;

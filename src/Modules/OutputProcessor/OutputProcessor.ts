@@ -1,10 +1,10 @@
 export default class OutputProcessor {
 
-    private result: number;
+    private result: string;
     private errorMessage: string;
 
     constructor() {
-        this.result = 0;
+        this.result = '';
         this.errorMessage = '';
     }
 
@@ -16,7 +16,7 @@ export default class OutputProcessor {
         console.log(this.errorMessage);
     }
 
-    public setResult(result: number): void {
+    public setResult(result: string): void {
         this.result = result;
     }
 

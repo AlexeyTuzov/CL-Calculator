@@ -23,7 +23,7 @@ export default class Parser {
         while (true) {
             let inputHasOperators: boolean = checkOperators(this.input);
             if (inputHasOperators) {
-                let nestedExpression: string = findFirstNestedExp(input);
+                let nestedExpression: string = findFirstNestedExp(this.input);
                 this.calculator.calculate(nestedExpression);
                 let errorMessage: string = this.calculator.getError();
                 if (errorMessage) {
@@ -45,6 +45,13 @@ export default class Parser {
     }
 
     private pasteResult(nestedExpression: string): void {
-        this.input = this.input.replace(`(${nestedExpression})`, this.intermediateResult);
+        let inParenthesesExpression: string = String.raw`(${nestedExpression})`;
+        if (nestedExpression.match(inParenthesesExpression)) {
+            this.input = this.input.replace(`(${nestedExpression})`, this.intermediateResult);
+            console.log(this.intermediateResult);
+        } else {
+            this.input = this.input.replace(`${nestedExpression}`, this.intermediateResult);
+        }
+
     }
 }

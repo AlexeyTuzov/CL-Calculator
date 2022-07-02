@@ -1,5 +1,5 @@
-import InputProcessor from './Modules/InputProcessor/InputProcessor';
+import Main from './Modules/Main/Main';
 
-const prompt = new InputProcessor();
-prompt.ask();
+const main = new Main()
+main.start();
 
