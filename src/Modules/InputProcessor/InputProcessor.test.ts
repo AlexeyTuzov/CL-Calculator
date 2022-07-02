@@ -31,8 +31,6 @@ describe('Input Processor:', () => {
     });
     it('when user press \'y\' repeat calculations', () => {
         readline.keyInYN = jest.fn().mockImplementationOnce(() => true);
-        const mockAsk = jest.spyOn(mockInputProcessor, 'ask');
-        mockInputProcessor.askForRepeat();
-        expect(mockAsk).toBeCalledTimes(1);
+        expect(mockInputProcessor.askForRepeat()).toBe(true);
     });
 });

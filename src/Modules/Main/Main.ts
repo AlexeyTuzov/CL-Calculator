@@ -21,10 +21,12 @@ export default class Main {
     }
 
     public start() {
-        this.inputProcessor.ask();
-        this.inputString = this.inputProcessor.getInput();
-        this.inputValidator.validate(this.inputString);
-        const validationError: string = this.inputValidator.getValidationResult();
+        while (true) {
+            this.inputProcessor.ask();
+            this.inputString = this.inputProcessor.getInput();
+            console.log('input string:', this.inputString);
+            this.inputValidator.validate(this.inputString);
+            const validationError: string = this.inputValidator.getValidationResult();
             if (validationError) {
                 this.outputProcessor.setError(validationError);
                 this.outputProcessor.logError();
@@ -34,7 +36,11 @@ export default class Main {
                 this.outputProcessor.setResult(this.outputString);
                 this.outputProcessor.logResult();
             }
+            let repeat: boolean | string = this.inputProcessor.askForRepeat();
+            if (!repeat) {
+                break;
+            }
+        }
 
-        this.inputProcessor.askForRepeat();
     }
 }

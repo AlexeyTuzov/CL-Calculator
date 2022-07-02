@@ -53,6 +53,12 @@ describe('Parser', () => {
         expect(mockGetResult).toHaveBeenCalledTimes(1);
         expect(mockParser.getResult()).toBe('42');
     });
+    it('remove redundant parentheses', () => {
+        mockParser['input'] = '(6)';
+        mockParser['intermediateResult'] = '6';
+        mockParser['pasteResult']('6');
+        expect(mockParser['input']).toBe('6');
+    });
     it('parse input without parentheses and save a result', () => {
         mockGetResult.mockImplementationOnce(() => '23');
         mockParser.parseUserInput('2+21');

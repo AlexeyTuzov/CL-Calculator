@@ -17,8 +17,8 @@ export default class InputProcessor {
         return this.input;
     }
 
-    public askForRepeat(): void {
-        if (readline.keyInYN('Continue calculations?')) this.ask();
+    public askForRepeat(): boolean | string {
+        return (readline.keyInYN('Continue calculations?'));
     }
 
     private trimSpaces(): void {
