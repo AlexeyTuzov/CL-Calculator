@@ -16,7 +16,7 @@ const findFirstHighPriorityOperation = (expression: string): string => {
     let operationExpressions = sortedByUnary.map(operator => {
         let shieldedSign = shieldSymbols(operator.sign);
         if (operator.unaryOnly) return String.raw`${shieldedSign}(-*\d+\.?\d*|\d+)`;
-        else  return String.raw`(\d+\.?\d*|\d+)${shieldedSign}(-?\d+\.?\d*|\d+)`;
+        else  return String.raw`(-?\d+\.?\d*|\d+)${shieldedSign}(-?\d+\.?\d*|\d+)`;
     });
 
     let matchArray: RegExpMatchArray | null;

@@ -58,6 +58,7 @@ export default class MathOperator {
     }
 
     private operate(math: MathClass) {
+        console.log('math operator:', this.mathOperation);
         math.doCalculations();
         const error = math.getError();
         if (error) {

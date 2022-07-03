@@ -36,6 +36,11 @@ describe('Form calculation object', () => {
             a: 11,
             b: -3,
             operator: '+'
-        })
+        });
+        expect(formCalculationObject('-11-3')).toEqual( {
+            a: -11,
+            b: 3,
+            operator: '-'
+        });
     });
 });
