@@ -1,9 +1,13 @@
 import MathOperator from './MathOperator';
 import Math_Addition from './MathClasses/Math_Addition/Math_Addition';
+import Math_Division from './MathClasses/Math_Division/Math_Division';
+import Math_Multiplication from './MathClasses/Math_Multiplication/Math_Multiplication';
+import Math_Subtraction from './MathClasses/Math_Subtraction/Math_Subtraction';
 
 let mockDoCalculations = jest.fn();
 let mockGetResult = jest.fn();
 let mockGetError = jest.fn();
+
 jest.mock('./MathClasses/Math_Addition/Math_Addition', () => {
     return jest.fn().mockImplementation(() => {
         return {
@@ -12,7 +16,35 @@ jest.mock('./MathClasses/Math_Addition/Math_Addition', () => {
             getError: mockGetError
         }
     });
-})
+});
+jest.mock('./MathClasses/Math_Division/Math_Division', () => {
+    return jest.fn().mockImplementation(() => {
+        return {
+            doCalculations: mockDoCalculations,
+            getResult: mockGetResult,
+            getError: mockGetError
+        }
+    });
+});
+jest.mock('./MathClasses/Math_Multiplication/Math_Multiplication', () => {
+    return jest.fn().mockImplementation(() => {
+        return {
+            doCalculations: mockDoCalculations,
+            getResult: mockGetResult,
+            getError: mockGetError
+        }
+    });
+});
+jest.mock('./MathClasses/Math_Subtraction/Math_Subtraction', () => {
+    return jest.fn().mockImplementation(() => {
+        return {
+            doCalculations: mockDoCalculations,
+            getResult: mockGetResult,
+            getError: mockGetError
+        }
+    });
+});
+
 
 describe('MathOperator', () => {
 
@@ -36,6 +68,7 @@ describe('MathOperator', () => {
             b: 24,
             operator: '+'
         });
+        expect(Math_Addition).toHaveBeenCalledTimes(1);
         expect(mathOperator.getResult()).toBe('66');
     });
     it('create subtraction math operation', () => {
@@ -46,6 +79,7 @@ describe('MathOperator', () => {
             b: 24,
             operator: '-'
         });
+        expect(Math_Subtraction).toHaveBeenCalledTimes(1);
         expect(mathOperator.getResult()).toBe('18');
     });
     it('create multiplication math operation', () => {
@@ -56,6 +90,7 @@ describe('MathOperator', () => {
             b: 5,
             operator: '*'
         });
+        expect(Math_Multiplication).toHaveBeenCalledTimes(1);
         expect(mathOperator.getResult()).toBe('25');
     });
     it('create division math operation', () => {
@@ -66,6 +101,7 @@ describe('MathOperator', () => {
             b: 25,
             operator: '/'
         });
+        expect(Math_Division).toHaveBeenCalledTimes(1);
         expect(mathOperator.getResult()).toBe('5');
     });
     it('catch an error if it is occurred during the calculations', () => {

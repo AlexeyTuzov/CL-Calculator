@@ -42,6 +42,7 @@ private MathOperator: MathOperator;
                         this.error = errorMessage;
                         break;
                     } else {
+                        this.error = '';
                         this.intermediateResult = this.MathOperator.getResult();
                         this.pasteResult(currentOperation);
                     }

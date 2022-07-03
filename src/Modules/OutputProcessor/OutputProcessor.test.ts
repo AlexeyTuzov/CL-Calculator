@@ -7,7 +7,7 @@ describe('Output Processor', () => {
 
     beforeEach(() => {
         mockOutputProcessor = new OutputProcessor();
-        spyConsole = jest.spyOn(console, 'log');
+        spyConsole = jest.spyOn(console, 'log').mockImplementation();
     });
 
     it('set calculations result', () => {

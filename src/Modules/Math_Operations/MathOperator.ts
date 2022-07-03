@@ -27,6 +27,7 @@ export default class MathOperator {
     }
 
     public calculate(mathOperation: MathOperation): void {
+        this.error = '';
         this.mathOperation = mathOperation;
         switch (this.mathOperation.operator) {
             case '+':

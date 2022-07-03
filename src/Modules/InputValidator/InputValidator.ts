@@ -7,6 +7,7 @@ export default class InputValidator {
     }
 
     public validate(input: string) {
+        this.error = '';
         this.checkParentheses(input);
         this.checkFractions(input);
     }

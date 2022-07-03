@@ -37,7 +37,7 @@ const checkOperatorsUsage = (expression: string): string => {
                     errorMessage = 'Wrong operators statement';
                 } else if (firstSign && secondSign) {
                     if ((firstSign.unaryOnly && secondSign.sign !== '-') ||
-                        (!firstSign.unaryOnly && !secondSign.unaryOnly)) {
+                        (!firstSign.unaryOnly && !secondSign.unaryOnly && secondSign.sign !== '-')) {
                         errorMessage = 'Wrong operators statement';
                     }
                 } else {

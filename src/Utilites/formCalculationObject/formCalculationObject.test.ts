@@ -32,5 +32,10 @@ describe('Form calculation object', () => {
             b: -1,
             operator: 'sin'
         });
+        expect(formCalculationObject('11+-3')).toEqual( {
+            a: 11,
+            b: -3,
+            operator: '+'
+        })
     });
 });

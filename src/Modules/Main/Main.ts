@@ -24,7 +24,6 @@ export default class Main {
         while (true) {
             this.inputProcessor.ask();
             this.inputString = this.inputProcessor.getInput();
-            console.log('input string:', this.inputString);
             this.inputValidator.validate(this.inputString);
             const validationError: string = this.inputValidator.getValidationResult();
             if (validationError) {

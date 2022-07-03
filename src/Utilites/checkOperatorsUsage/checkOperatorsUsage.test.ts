@@ -48,7 +48,7 @@ describe('Check operators statement', () => {
         expect(checkOperatorsUsage('1+2-3*4+2/sin2')).toBe('Correct');
         expect(checkOperatorsUsage('-1+2-3')).toBe('Correct');
         expect(checkOperatorsUsage('-0.1+0.22-3.33')).toBe('Correct');
-        expect(checkOperatorsUsage('1+-2-3')).toBe('Wrong operators statement');
+        expect(checkOperatorsUsage('1+-2-3')).toBe('Correct');
     });
     it('support multiple operator symbols if it is specified', () => {
         expect(checkOperatorsUsage('-2**2-3.33')).toBe('Correct');

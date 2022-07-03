@@ -19,6 +19,7 @@ export default class Parser {
     }
 
     public parseUserInput(input: string): void {
+        this.error = '';
         this.input = input;
         while (true) {
             let inputHasOperators: boolean = checkOperators(this.input);

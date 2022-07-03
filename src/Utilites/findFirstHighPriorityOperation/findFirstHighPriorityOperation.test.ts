@@ -52,5 +52,6 @@ describe('findFirstHighPriorityOperation', () => {
         expect(findFirstHighPriorityOperation('0.1+0.2/0.3+0.4-0.5')).toBe('0.2/0.3');
         expect(findFirstHighPriorityOperation('12+sin1*13')).toBe('sin1');
         expect(findFirstHighPriorityOperation('12+sin-1*13')).toBe('sin-1');
+        expect(findFirstHighPriorityOperation('11+-3-8')).toBe('11+-3');
     });
 });
